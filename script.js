@@ -1,56 +1,92 @@
-// ==========================================
-// 1. SELEÇÃO DE ELEMENTOS (DOM)
-// ==========================================
-// Selecionando os elementos do HTML que vamos manipular
-const botaoEnviar = document.querySelector('#btn-enviar');
-const formulario = document.querySelector('#meu-formulario');
-const feedbackTexto = document.querySelector('.feedback-mensagem');
+// ==========================================================================
+// 1. SIMULADOR DE IMPACTO AMBIENTAL (SEÇÃO CALCULADORA)
+// ==========================================================================
 
-// ==========================================
-// 2. FUNÇÕES E LÓGICA DO SISTEMA
-// ==========================================
+// Seleção dos elementos da calculadora
+const campoHectares = document.getElementById('hectares-input');
+const botaoCalcular = document.getElementById('btn-calcular');
+const painelResultado = document.getElementById('resultado-calc');
+
+// Elementos onde os números calculados serão exibidos
+const displayAgua = document.getElementById('res-agua');
+const displayCo2 = document.getElementById('res-co2');
 
 /**
- * Função para validar os campos do formulário
- * @returns {boolean} - Retorna verdadeiro se o formulário for válido
+ * Executa o cálculo de impacto com base na quantidade de hectares inserida.
  */
-function validarFormulario() {
-    const nomeInput = document.querySelector('#nome').value;
-    
-    if (nomeInput.trim() === "") {
-        exibirMensagem("Por favor, preencha o campo de nome.", "erro");
-        return false;
+function calcularImpactoAgro() {
+    // Converte o valor digitado para número decimal
+    const hectares = parseFloat(campoHectares.value);
+
+    // Validação: verifica se é um número válido e maior que zero
+    if (isNaN(hectares) || hectares <= 0) {
+        alert("Por favor, insira uma quantidade de hectares válida e maior que zero.");
+        campoHectares.focus();
+        return;
     }
-    return true;
+
+    // Constantes fictícias baseadas em médias de vantagens ecológicas por ano:
+    // - Economia média de 25.000 litros de água por hectare com manejo inteligente.
+    // - Retenção/redução média de 500 kg de CO₂ por hectare usando plantio direto.
+    const LITROS_POR_HECTARE = 25000;
+    const KG_CO2_POR_HECTARE = 500;
+
+    // Realiza a lógica matemática
+    const totalAguaEconomizada = hectares * LITROS_POR_HECTARE;
+    const totalCo2Retido = hectares * KG_CO2_POR_HECTARE;
+
+    // Atualiza os textos na tela formatando com separadores de milhar (padrão pt-BR)
+    displayAgua.textContent = totalAguaEconomizada.toLocaleString('pt-BR');
+    displayCo2.textContent = totalCo2Retido.toLocaleString('pt-BR');
+
+    // Altera o estilo para exibir o painel de resultados (mudando o 'display: none' do CSS)
+    painelResultado.style.display = 'flex';
 }
 
-/**
- * Função para exibir feedback visual para o usuário
- * @param {string} texto - A mensagem a ser exibida
- * @param {string} tipo - O tipo da mensagem (ex: 'sucesso' ou 'erro')
- */
-function exibirMensagem(texto, tipo) {
-    feedbackTexto.textContent = texto;
-    feedbackTexto.className = `feedback-mensagem ${tipo}`; // Adiciona classes para estilização CSS
-    
-    // Pequena animação/efeito de fade-in simples usando classes
-    feedbackTexto.style.opacity = 1;
-}
+// Escutador de evento para o clique do botão de calcular
+botaoCalcular.addEventListener('click', calcularImpactoAgro);
 
-// ==========================================
-// 3. ESCUTADORES DE EVENTOS (EVENT LISTENERS)
-// ==========================================
-
-// Responde ao clique do botão ou envio do formulário
-formulario.addEventListener('submit', function(event) {
-    // Evita que a página recarregue ao enviar o formulário
-    event.preventDefault(); 
-    
-    // Chama a função de validação
-    const formularioValido = validarFormulario();
-    
-    if (formularioValido) {
-        exibirMensagem("Formulário enviado com sucesso! Viva a interatividade!", "sucesso");
-        // Aqui você continuaria com a lógica de envio de dados
+// Permite calcular também ao pressionar a tecla "Enter" dentro do campo de texto
+campoHectares.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        calcularImpactoAgro();
     }
 });
+
+
+// ==========================================================================
+// 2. VALIDAÇÃO E GESTÃO DO FORMULÁRIO DE CONTATO
+// ==========================================================================
+
+// Seleção dos elementos do formulário
+const formularioContato = document.getElementById('formulario-contato');
+const painelFeedback = document.getElementById('feedback-form');
+
+/**
+ * Exibe uma mensagem de feedback (sucesso ou erro) estilizada pelo CSS.
+ * @param {string} mensagem - O texto que aparecerá para o usuário.
+ * @param {string} tipo - 'sucesso' ou 'erro' (define a classe CSS aplicável).
+ */
+function exibirMensagemFeedback(mensagem, tipo) {
+    painelFeedback.textContent = mensagem;
+    // Sobrescreve as classes para aplicar a estilização correta do style.css
+    painelFeedback.className = `feedback-mensagem ${tipo}`;
+}
+
+// Escutador de evento para gerenciar o envio (submit) do formulário
+formularioContato.addEventListener('submit', function(event) {
+    // Impede o comportamento padrão do HTML de atualizar a página ao enviar o formulário
+    event.preventDefault();
+
+    // Captura os valores digitados limpos de espaços extras nas pontas (.trim())
+    const nomeCompleto = document.getElementById('nome').value.trim();
+    const emailUsuario = document.getElementById('email').value.trim();
+    const mensagemUsuario = document.getElementById('mensagem').value.trim();
+
+    // Validação de segurança em JavaScript
+    if (nomeCompleto.length < 3) {
+        exibirMensagemFeedback("Por favor, informe seu nome completo (mínimo de 3 caracteres).", "erro");
+        return;
+    }
+
+    if (mensagemUsuario.length
