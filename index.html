@@ -3,92 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Página Interativa</title>
-    <style>
-        /* Estilização básica apenas para visualização e feedback */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-        .form-grupo {
-            margin-bottom: 15px;
-        }
-        .form-grupo label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .form-grupo input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            border: none;
-            color: white;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .feedback-mensagem {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 4px;
-            text-align: center;
-            font-weight: bold;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .sucesso {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .erro {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-    </style>
+    <title>AgroVida | Sustentabilidade no Campo</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h2>Cadastro Interativo</h2>
-        
-        <form id="meu-formulario">
-            <div class="form-grupo">
-                <label for="nome">Nome Completo:</label>
-                <input type="text" id="nome" placeholder="Digite seu nome aqui">
+    <header>
+        <div class="interface header-container">
+            <div class="logo">
+                <h1>Agro<span>Vida</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#Praticas">Práticas</a></li>
+                    <li><a href="#calculadora">Simulador</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="banner">
+        <div class="interface">
+            <h2>O Futuro da Agricultura é Sustentável</h2>
+            <p>Unindo tecnologia, respeito à natureza e produtividade para alimentar o mundo de forma consciente.</p>
+            <a href="#calculadora" class="btn-principal">Simule seu Impacto</a>
+        </div>
+    </section>
+
+    <section id="sobre" class="secao-info">
+        <div class="interface">
+            <h2>Pilares do Agro Sustentável</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Plantio Direto</h3>
+                    <p>Protege o solo contra a erosão, mantém a umidade natural e reduz drasticamente a emissão de carbono na atmosfera.</p>
+                </div>
+                <div class="card">
+                    <h3>Rotação de Culturas</h3>
+                    <p>Alternar espécies melhora a saúde do solo, quebra o ciclo de pragas e reduz a dependência de fertilizantes químicos.</p>
+                </div>
+                <div class="card">
+                    <h3>Gestão de Água</h3>
+                    <p>Sistemas de irrigação gota a gota combinados com sensores meteorológicos evitam o desperdício dos recursos hídricos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculadora" class="secao-calculadora">
+        <div class="interface container-calc">
+            <h2>Simulador de Impacto Agro</h2>
+            <p>Insira o tamanho da sua área produtiva (em hectares) para estimar os benefícios da transição para práticas sustentáveis por ano.</p>
+            
+            <div class="form-calc">
+                <input type="number" id="hectares-input" placeholder="Ex: 50" min="1">
+                <button id="btn-calcular">Calcular Impacto</button>
             </div>
 
-            <button type="submit" id="btn-enviar">Enviar Dados</button>
-        </form>
+            <div id="resultado-calc" class="resultado-box">
+                <div class="dado-resultado">
+                    <span class="numero" id="res-agua">0</span>
+                    <span class="rotulo">Litros de água economizados</span>
+                </div>
+                <div class="dado-resultado">
+                    <span class="numero" id="res-co2">0</span>
+                    <span class="rotulo">Kg de CO₂ retidos no solo</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <div class="feedback-mensagem"></div>
-    </div>
+    <section id="contato" class="secao-contato">
+        <div class="interface container-contato">
+            <h2>Fale com um Especialista</h2>
+            <p>Quer transformar sua produção ou tirar dúvidas? Envie uma mensagem.</p>
+            
+            <form id="formulario-contato">
+                <div class="form-grupo">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" required placeholder="Seu nome completo">
+                </div>
+                <div class="form-grupo">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" required placeholder="seuemail@provedor.com">
+                </div>
+                <div class="form-grupo">
+                    <label for="mensagem">Mensagem:</label>
+                    <textarea id="mensagem" required placeholder="Como podemos ajudar você?" rows="4"></textarea>
+                </div>
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+
+            <div id="feedback-form" class="feedback-mensagem"></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 AgroVida - Cultivando um amanhã melhor.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
