@@ -1,16 +1,14 @@
-/* ==========================================
-   1. VARIÁVEIS DE CORES E CONFIGURAÇÕES (RESET)
-   ========================================== */
+/* ==========================================================================
+   1. VARIÁVEIS DE CORES E CONFIGURAÇÕES GERAIS (RESET)
+   ========================================================================== */
 :root {
-    --cor-fundo: #f0f2f5;
-    --cor-card: #ffffff;
-    --cor-texto: #333333;
-    --cor-primaria: #007bff;
-    --cor-primaria-hover: #0056b3;
-    --cor-sucesso: #28a745;
-    --cor-sucesso-fundo: #d4edda;
-    --cor-erro: #dc3545;
-    --cor-erro-fundo: #f8d7da;
+    --cor-primaria: #2e7d32;       /* Verde Agro Principal */
+    --cor-primaria-hover: #1b5e20; /* Verde mais escuro para interações */
+    --cor-detalhe: #81c784;        /* Verde claro para destaques */
+    --cor-fundo-claro: #f4f7f4;   /* Fundo geral da página */
+    --cor-fundo-escuro: #1e241e;  /* Fundo do rodapé */
+    --cor-texto: #333333;         /* Cor principal dos textos */
+    --card-fundo: #ffffff;        /* Fundo dos cards e formulários */
     --borda-raio: 8px;
     --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -19,125 +17,83 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth; /* Deixa o deslize da página suave ao usar o menu */
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--cor-fundo);
+    background-color: var(--cor-fundo-claro);
     color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+/* Container de largura máxima para centralizar o conteúdo */
+.interface {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==========================================================================
+   2. CABEÇALHO E NAVEGAÇÃO (HEADER)
+   ========================================================================== */
+header {
+    background-color: var(--card-fundo);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 100vh;
     padding: 20px;
 }
 
-/* ==========================================
-   2. CONTAINER PRINCIPAL (CARD)
-   ========================================== */
-.container {
-    background-color: var(--cor-card);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    width: 100%;
-    max-width: 400px;
-    transform: translateY(0);
-    transition: var(--transicao);
-}
-
-.container:hover {
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-}
-
-h2 {
-    margin-bottom: 25px;
+.logo h1 {
+    color: var(--cor-texto);
     font-size: 24px;
-    text-align: center;
-    color: #1a1a1a;
     font-weight: 700;
 }
 
-/* ==========================================
-   3. FORMULÁRIO E CAMPOS DE ENTRADA
-   ========================================== */
-.form-grupo {
-    margin-bottom: 20px;
+.logo h1 span {
+    color: var(--cor-primaria);
 }
 
-.form-grupo label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 24px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--cor-texto);
     font-weight: 600;
-    color: #555;
-}
-
-.form-grupo input {
-    width: 100%;
-    padding: 12px 16px;
-    border: 2px solid #e1e1e1;
-    border-radius: var(--borda-raio);
-    font-size: 16px;
-    outline: none;
     transition: var(--transicao);
-    background-color: #fbfbfb;
 }
 
-/* Estado de Foco (Quando o usuário clica no campo) */
-.form-grupo input:focus {
-    border-color: var(--cor-primaria);
-    background-color: var(--cor-card);
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15);
+nav ul li a:hover {
+    color: var(--cor-primaria);
 }
 
-/* ==========================================
-   4. BOTÃO INTERATIVO
-   ========================================== */
-button {
-    width: 100%;
-    padding: 14px;
-    background-color: var(--cor-primaria);
-    color: white;
-    border: none;
-    border-radius: var(--borda-raio);
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transicao);
-    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.15);
-}
-
-button:hover {
-    background-color: var(--cor-primaria-hover);
-    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.25);
-    transform: translateY(-2px);
-}
-
-button:active {
-    transform: translateY(0);
-}
-
-/* ==========================================
-   5. MENSAGENS DE FEEDBACK (CONTROLADAS POR JS)
-   ========================================== */
-.feedback-mensagem {
-    margin-top: 20px;
-    padding: 14px;
-    border-radius: var(--borda-raio);
+/* ==========================================================================
+   3. BANNER PRINCIPAL (HERO SECTION)
+   ========================================================================== */
+.banner {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1200') no-repeat center center/cover;
+    height: 70vh;
+    display: flex;
+    align-items: center;
     text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    display: none; /* Escondido por padrão */
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* Classes ativadas dinamicamente via JavaScript */
-.feedback-mensagem.sucesso {
-    display: block;
-    opacity: 1;
-    transform: scale(1);
-    background-color: var(--cor-sucesso-fundo);
-    color: var(--cor-sucesso);
+    color: white;
+    margin-top: 70px; /* Evita que o header fix
