@@ -1,219 +1,143 @@
-/* Reset básico */
+/* ==========================================
+   1. VARIÁVEIS DE CORES E CONFIGURAÇÕES (RESET)
+   ========================================== */
+:root {
+    --cor-fundo: #f0f2f5;
+    --cor-card: #ffffff;
+    --cor-texto: #333333;
+    --cor-primaria: #007bff;
+    --cor-primaria-hover: #0056b3;
+    --cor-sucesso: #28a745;
+    --cor-sucesso-fundo: #d4edda;
+    --cor-erro: #dc3545;
+    --cor-erro-fundo: #f8d7da;
+    --borda-raio: 8px;
+    --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-:root{
-  --verde: #2f8f4e;
-  --verde-escuro: #22663a;
-  --cinza-claro: #f5f6f7;
-  --cinza: #e1e4e8;
-  --texto: #1f2933;
-  --accento: #ffd166;
-  --branco: #ffffff;
-  --max-width: 1100px;
-  --radius: 10px;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  color-scheme: light;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
 }
 
-/* Layout geral */
-body{
-  background: linear-gradient(180deg, var(--cinza-claro) 0%, #ffffff 100%);
-  color: var(--texto);
-  line-height: 1.6;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  padding: 20px;
-}
-
-/* Container central */
-header, main, footer {
-  max-width: var(--max-width);
-  margin: 0 auto 24px;
-}
-
-/* Navegação */
-header nav{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  background: var(--branco);
-  padding: 14px 18px;
-  border-radius: var(--radius);
-  box-shadow: 0 6px 18px rgba(18, 28, 37, 0.06);
-}
-
-.logo{
-  font-weight: 700;
-  color: var(--verde-escuro);
-  font-size: 1.15rem;
-  letter-spacing: 0.4px;
-}
-
-header nav ul{
-  list-style: none;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-header nav a{
-  text-decoration: none;
-  color: var(--texto);
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: background .18s, color .18s, transform .12s;
-}
-
-header nav a:hover,
-header nav a:focus{
-  background: var(--cinza);
-  outline: none;
-  transform: translateY(-1px);
-}
-
-/* Seções */
-section{
-  background: var(--branco);
-  padding: 28px;
-  border-radius: var(--radius);
-  box-shadow: 0 6px 18px rgba(18, 28, 37, 0.04);
-  margin-bottom: 18px;
-}
-
-/* Início */
-#inicio h1{
-  font-size: 1.9rem;
-  color: var(--verde-escuro);
-  margin-bottom: 8px;
-}
-
-#inicio p{
-  color: #334153;
-  font-size: 1.02rem;
-}
-
-/* Importância / Tecnologia / Desafios */
-section h2{
-  font-size: 1.25rem;
-  color: var(--verde);
-  margin-bottom: 10px;
-}
-
-#tecnologia ul{
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-  padding-left: 0;
-}
-
-#tecnologia li{
-  background: linear-gradient(90deg, rgba(47,143,78,0.06), rgba(255,209,102,0.03));
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(34,102,58,0.06);
-  font-weight: 600;
-}
-
-/* Formulário de contato */
-#contato form{
-  display: grid;
-  gap: 12px;
-  max-width: 540px;
-}
-
-#contato label{
-  font-size: 0.95rem;
-  color: #2b3b44;
-}
-
-#contato input[type="text"],
-#contato input[type="email"]{
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--cinza);
-  font-size: 1rem;
-  background: #fff;
-  transition: border-color .12s, box-shadow .12s;
-}
-
-#contato input:focus{
-  border-color: var(--verde);
-  box-shadow: 0 4px 18px rgba(34,102,58,0.08);
-  outline: none;
-}
-
-#contato button[type="submit"]{
-  cursor: pointer;
-  padding: 10px 14px;
-  background: linear-gradient(180deg, var(--verde) 0%, var(--verde-escuro) 100%);
-  color: var(--branco);
-  border: none;
-  border-radius: 8px;
-  font-weight: 700;
-  transition: transform .12s, box-shadow .12s, opacity .12s;
-}
-
-#contato button[type="submit"]:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(47,143,78,0.14);
-}
-
-/* Rodapé */
-footer{
-  text-align: center;
-  color: #616b73;
-  font-size: 0.95rem;
-  padding: 12px;
-}
-
-/* Responsividade: menu simples mobile */
-@media (max-width: 720px){
-  header nav{
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  header nav ul{
+/* ==========================================
+   2. CONTAINER PRINCIPAL (CARD)
+   ========================================== */
+.container {
+    background-color: var(--cor-card);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     width: 100%;
-    justify-content: space-between;
-    gap: 6px;
-    margin-top: 8px;
-    flex-wrap: wrap;
-  }
-
-  #inicio h1{
-    font-size: 1.5rem;
-  }
-
-  section{
-    padding: 18px;
-  }
+    max-width: 400px;
+    transform: translateY(0);
+    transition: var(--transicao);
 }
 
-/* Acessibilidade: foco visível para teclado */
-a:focus, button:focus, input:focus {
-  outline: 3px solid rgba(34,102,58,0.12);
-  outline-offset: 2px;
+.container:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
-/* Pequenos detalhes visuais */
-blockquote, .highlight {
-  background: linear-gradient(90deg, rgba(255,209,102,0.08), rgba(47,143,78,0.04));
-  padding: 10px 14px;
-  border-radius: 10px;
-  border-left: 4px solid var(--accento);
+h2 {
+    margin-bottom: 25px;
+    font-size: 24px;
+    text-align: center;
+    color: #1a1a1a;
+    font-weight: 700;
 }
 
-/* Footer fix (opcional): mantém rodapé visível */
-@media (min-height: 900px) {
-  body { min-height: 100vh; display: flex; flex-direction: column; }
-  header, main { flex: 0 0 auto; }
-  footer { margin-top: auto; }
+/* ==========================================
+   3. FORMULÁRIO E CAMPOS DE ENTRADA
+   ========================================== */
+.form-grupo {
+    margin-bottom: 20px;
 }
+
+.form-grupo label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+}
+
+.form-grupo input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e1e1;
+    border-radius: var(--borda-raio);
+    font-size: 16px;
+    outline: none;
+    transition: var(--transicao);
+    background-color: #fbfbfb;
+}
+
+/* Estado de Foco (Quando o usuário clica no campo) */
+.form-grupo input:focus {
+    border-color: var(--cor-primaria);
+    background-color: var(--cor-card);
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15);
+}
+
+/* ==========================================
+   4. BOTÃO INTERATIVO
+   ========================================== */
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    border-radius: var(--borda-raio);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transicao);
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.15);
+}
+
+button:hover {
+    background-color: var(--cor-primaria-hover);
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* ==========================================
+   5. MENSAGENS DE FEEDBACK (CONTROLADAS POR JS)
+   ========================================== */
+.feedback-mensagem {
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: var(--borda-raio);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    display: none; /* Escondido por padrão */
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Classes ativadas dinamicamente via JavaScript */
+.feedback-mensagem.sucesso {
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+    background-color: var(--cor-sucesso-fundo);
+    color: var(--cor-sucesso);
